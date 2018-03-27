@@ -57,7 +57,7 @@ class DogPickerViewController: UIViewController {
 		self.dogImageView.backgroundColor = UIColor.lightGray
 	}
 
-	@IBAction func userDidTapOnMoreBreed(_ sender: UIButton) {
+	@objc @IBAction private func userDidTapOnMoreBreed(_ sender: UIButton) {
 
 	}
 }

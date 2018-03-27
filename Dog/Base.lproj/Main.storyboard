@@ -71,7 +71,6 @@
                         <outlet property="dogNameLabel" destination="vC2-9N-zNF" id="arM-GJ-OMT"/>
                         <outlet property="dogPickerView" destination="vGE-YX-v2D" id="M1g-U8-k0N"/>
                         <outlet property="moreBreedButton" destination="dbF-Vg-ToL" id="0cS-O3-ox9"/>
-                        <outlet property="userDidTapOnMoreBreed" destination="dbF-Vg-ToL" id="1iE-bs-pjP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
