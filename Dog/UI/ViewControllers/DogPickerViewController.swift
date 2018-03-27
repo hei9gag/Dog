@@ -19,7 +19,7 @@ class DogPickerViewController: UIViewController {
 	@IBOutlet weak var dogPickerView: UIPickerView!
 
 	fileprivate var viewModel: DogPickerViewModel!
-	fileprivate var disposable: Disposable?
+	fileprivate let disposable = CompositeDisposable()
 
 	private var loadingView: LoadingView!
 
@@ -35,8 +35,9 @@ class DogPickerViewController: UIViewController {
 				return
 			}
 			self.dogNameLabel.text = self.viewModel.getTitleForIndex(0)?.firstUppercased
+			self.disposable += self.viewModel.fetchBreedImage(breedName: self.dogNameLabel.text!.lowercased())
 			self.dogPickerView.reloadAllComponents()
-		}) <~ self.viewModel.dogs
+		}) <~ self.viewModel.dogs.skipRepeats { $0.count == $1.count }
     }
 
     override func didReceiveMemoryWarning() {
