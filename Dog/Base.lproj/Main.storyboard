@@ -34,10 +34,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dr0-G7-Yju">
-                                <rect key="frame" x="16" y="64" width="288" height="253"/>
+                                <rect key="frame" x="16" y="64" width="288" height="248"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dbF-Vg-ToL">
-                                <rect key="frame" x="97" y="321" width="126" height="27"/>
+                                <rect key="frame" x="97" y="316" width="126" height="30"/>
                                 <state key="normal" title="More of this breed"/>
                                 <connections>
                                     <action selector="userDidTapOnMoreBreed:" destination="BYZ-38-t0r" eventType="primaryActionTriggered" id="U7K-S2-WiC"/>
@@ -46,14 +46,13 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="dbF-Vg-ToL" firstAttribute="top" secondItem="dr0-G7-Yju" secondAttribute="bottom" constant="4" id="0JE-bv-YrQ"/>
                             <constraint firstItem="dr0-G7-Yju" firstAttribute="top" secondItem="vC2-9N-zNF" secondAttribute="bottom" constant="4" id="3cs-ni-8SQ"/>
-                            <constraint firstItem="vGE-YX-v2D" firstAttribute="top" secondItem="dbF-Vg-ToL" secondAttribute="bottom" constant="4" id="70y-Kb-0Ee"/>
                             <constraint firstItem="dFT-X9-wn1" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="CuT-Ag-YUt"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="dFT-X9-wn1" secondAttribute="trailing" id="DyE-ju-PCZ"/>
                             <constraint firstItem="dr0-G7-Yju" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="I8f-kc-S6Q"/>
+                            <constraint firstItem="dbF-Vg-ToL" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="IK6-aB-gxv"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="vC2-9N-zNF" secondAttribute="trailing" constant="16" id="Ivb-Eh-ptC"/>
-                            <constraint firstItem="dbF-Vg-ToL" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="RyZ-cD-9Mr"/>
+                            <constraint firstItem="dbF-Vg-ToL" firstAttribute="top" secondItem="dr0-G7-Yju" secondAttribute="bottom" constant="4" id="KlE-zE-bd5"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="vGE-YX-v2D" secondAttribute="bottom" id="StH-Su-gI5"/>
                             <constraint firstItem="vC2-9N-zNF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="UbU-QK-H75"/>
                             <constraint firstItem="dFT-X9-wn1" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="bZY-dv-Ub3"/>
@@ -61,8 +60,8 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dr0-G7-Yju" secondAttribute="trailing" constant="16" id="lLV-RI-gNM"/>
                             <constraint firstItem="vC2-9N-zNF" firstAttribute="top" secondItem="dFT-X9-wn1" secondAttribute="bottom" constant="4" id="qB9-Jd-jCt"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="vGE-YX-v2D" secondAttribute="trailing" id="qMA-lp-g2m"/>
-                            <constraint firstItem="dbF-Vg-ToL" firstAttribute="top" secondItem="vGE-YX-v2D" secondAttribute="top" constant="-31" id="szr-qm-Qyp"/>
                             <constraint firstItem="dFT-X9-wn1" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="uCb-p4-9FP"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="dr0-G7-Yju" secondAttribute="bottom" constant="256" id="uun-ub-BNe"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
