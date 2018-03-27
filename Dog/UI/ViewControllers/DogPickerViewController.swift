@@ -20,7 +20,7 @@ class DogPickerViewController: UIViewController {
 	@IBOutlet weak var dogPickerView: UIPickerView!
 
 	fileprivate var viewModel: DogPickerViewModel!
-	fileprivate let disposable = CompositeDisposable()
+	fileprivate var fetchImageDisposable: Disposable?
 
 	private var loadingView: LoadingView!
 
@@ -28,24 +28,7 @@ class DogPickerViewController: UIViewController {
         super.viewDidLoad()
 		self.setupUI()
 		self.viewModel = DogPickerViewModel()
-
-		self.reactive.makeBindingTarget(on: UIScheduler(), { [unowned self] (viewController, dogs: [Dog]) in
-			self.loadingView.isHidden = !dogs.isEmpty
-			self.dogPickerView.isHidden = dogs.isEmpty
-			guard !dogs.isEmpty else {
-				return
-			}
-			self.dogNameLabel.text = self.viewModel.getTitleForIndex(0)?.firstUppercased
-			self.disposable += self.viewModel.fetchBreedImage(breedName: self.dogNameLabel.text!.lowercased())
-			self.dogPickerView.reloadAllComponents()
-		}) <~ self.viewModel.dogs.skipRepeats { $0.count == $1.count }
-
-		self.reactive.makeBindingTarget(on: UIScheduler(), { [unowned self] (viewController, dogImages: [URL]) in
-			guard !dogImages.isEmpty else {
-				return
-			}
-			self.dogImageView.sd_setImage(with: dogImages[0], placeholderImage: nil)
-		}) <~ self.viewModel.dogImages
+		self.viewModelBinding()
     }
 
     override func didReceiveMemoryWarning() {
@@ -64,6 +47,26 @@ class DogPickerViewController: UIViewController {
 		self.dogPickerView.backgroundColor = UIColor.lightGray
 
 		self.dogImageView.backgroundColor = UIColor.lightGray
+	}
+
+	private func viewModelBinding() {
+		self.reactive.makeBindingTarget(on: UIScheduler(), { [unowned self] (viewController, dogs: [Dog]) in
+			self.loadingView.isHidden = !dogs.isEmpty
+			self.dogPickerView.isHidden = dogs.isEmpty
+			guard !dogs.isEmpty, let dogName = self.viewModel.getTitleForIndex(0) else {
+				return
+			}
+			self.dogNameLabel.text = dogName
+			self.fetchImageDisposable = self.viewModel.fetchBreedImage(breedName: dogName.lowercased())
+			self.dogPickerView.reloadAllComponents()
+		}) <~ self.viewModel.dogs.skipRepeats { $0.count == $1.count }
+
+		self.reactive.makeBindingTarget(on: UIScheduler(), { [unowned self] (viewController, dogImages: [URL]) in
+			guard !dogImages.isEmpty else {
+				return
+			}
+			self.dogImageView.sd_setImage(with: dogImages[0], placeholderImage: nil)
+		}) <~ self.viewModel.dogImages
 	}
 
 	@objc @IBAction private func userDidTapOnMoreBreed(_ sender: UIButton) {
@@ -88,6 +91,11 @@ extension DogPickerViewController: UIPickerViewDataSource {
 	}
 
 	func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-		self.dogNameLabel.text = self.viewModel.getTitleForIndex(row)?.firstUppercased
+		guard let dogName = self.viewModel.getTitleForIndex(row) else {
+			return
+		}
+		self.dogNameLabel.text = dogName.firstUppercased
+		self.fetchImageDisposable?.dispose()
+		self.fetchImageDisposable = self.viewModel.fetchBreedImage(breedName: dogName)
 	}
 }
