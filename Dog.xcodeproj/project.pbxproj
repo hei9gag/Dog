@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2FA3F5D4AB40AB349BBBD5BC /* Pods_Dog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841563D8B9458F70DE605F1B /* Pods_Dog.framework */; };
 		485442F7F5C16726CF3489A8 /* Pods_DogTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 684E81CF64A7217F08F7A0B1 /* Pods_DogTests.framework */; };
+		A71E65A8206A764200BCB2AD /* DogPickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71E65A7206A764200BCB2AD /* DogPickerViewModel.swift */; };
 		A77FCBAD206908F40031FA9F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77FCBAC206908F40031FA9F /* AppDelegate.swift */; };
 		A77FCBAF206908F40031FA9F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77FCBAE206908F40031FA9F /* ViewController.swift */; };
 		A77FCBB2206908F40031FA9F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A77FCBB0206908F40031FA9F /* Main.storyboard */; };
@@ -55,6 +56,7 @@
 		684E81CF64A7217F08F7A0B1 /* Pods_DogTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DogTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		841563D8B9458F70DE605F1B /* Pods_Dog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CBEA0ECE24EFF254C77320C /* Pods-DogTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DogTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DogTests/Pods-DogTests.debug.xcconfig"; sourceTree = "<group>"; };
+		A71E65A7206A764200BCB2AD /* DogPickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogPickerViewModel.swift; sourceTree = "<group>"; };
 		A77FCBA9206908F40031FA9F /* Dog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A77FCBAC206908F40031FA9F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A77FCBAE206908F40031FA9F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -258,6 +260,7 @@
 			isa = PBXGroup;
 			children = (
 				A79BE8582069488600F33C19 /* DogPickerViewController.swift */,
+				A71E65A7206A764200BCB2AD /* DogPickerViewModel.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -516,6 +519,7 @@
 				A79BE829206922C900F33C19 /* BreedImageResponseModel.swift in Sources */,
 				A79BE85C206948B100F33C19 /* LoadingView.swift in Sources */,
 				A79BE82320691E7200F33C19 /* ResponseError.swift in Sources */,
+				A71E65A8206A764200BCB2AD /* DogPickerViewModel.swift in Sources */,
 				A77FCBD820690C1E0031FA9F /* ReactiveHTTPClient.swift in Sources */,
 				A77FCBCF20690A760031FA9F /* BreedListResponseModel.swift in Sources */,
 				A79BE85320693A0000F33C19 /* Dog.swift in Sources */,

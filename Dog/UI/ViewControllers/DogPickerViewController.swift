@@ -8,19 +8,35 @@
 
 import UIKit
 import PinLayout
+import ReactiveCocoa
+import ReactiveSwift
 
 class DogPickerViewController: UIViewController {
 
-	@IBOutlet weak var selectButton: UIButton!
+	@IBOutlet weak var moreBreedButton: UIButton!
+	@IBOutlet weak var dogImageView: UIImageView!
 	@IBOutlet weak var dogNameLabel: UILabel!
 	@IBOutlet weak var dogPickerView: UIPickerView!
-	var loadingView: LoadingView!
 
-	var pickerData: [String] = [String]()
+	fileprivate var viewModel: DogPickerViewModel!
+	fileprivate var disposable: Disposable?
+
+	private var loadingView: LoadingView!
 
 	override func viewDidLoad() {
         super.viewDidLoad()
 		self.setupUI()
+		self.viewModel = DogPickerViewModel()
+
+		self.reactive.makeBindingTarget(on: UIScheduler(), { [unowned self] (viewController, dogs: [Dog]) in
+			self.loadingView.isHidden = !dogs.isEmpty
+			self.dogPickerView.isHidden = dogs.isEmpty
+			guard !dogs.isEmpty else {
+				return
+			}
+			self.dogNameLabel.text = self.viewModel.getTitleForIndex(0)?.firstUppercased
+			self.dogPickerView.reloadAllComponents()
+		}) <~ self.viewModel.dogs
     }
 
     override func didReceiveMemoryWarning() {
@@ -28,36 +44,40 @@ class DogPickerViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-	override func viewDidLayoutSubviews() {
-		super.viewDidLayoutSubviews()
-	}
-
 	private func setupUI() {
 		self.loadingView = LoadingView()
 		self.view.addSubview(self.loadingView)
 		self.loadingView.pin.all()
-		
-		// Connect data:
+
 		self.dogPickerView.delegate = self
 		self.dogPickerView.dataSource = self
+		self.dogPickerView.isHidden = true
+		self.dogPickerView.backgroundColor = UIColor.lightGray
 
-		// Do any additional setup after loading the view.
-		self.pickerData = ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6"]
+		self.dogImageView.backgroundColor = UIColor.lightGray
+	}
+
+	@IBAction func userDidTapOnMoreBreed(_ sender: UIButton) {
+
 	}
 }
 
 extension DogPickerViewController: UIPickerViewDelegate {
 	func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-		 return pickerData[row]
+		 return self.viewModel.getTitleForIndex(row)?.firstUppercased
 	}
 }
 
 extension DogPickerViewController: UIPickerViewDataSource {
 	func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-		return self.pickerData.count
+		return self.viewModel.dogs.value.count
 	}
 
 	func numberOfComponents(in pickerView: UIPickerView) -> Int {
 		return 1
+	}
+
+	func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+		self.dogNameLabel.text = self.viewModel.getTitleForIndex(row)?.firstUppercased
 	}
 }

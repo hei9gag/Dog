@@ -28,5 +28,6 @@ final class LoadingView: UIView {
 		addSubview(self.contentView)
 		self.contentView.frame = self.bounds
 		self.contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+		self.contentView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
 	}
 }

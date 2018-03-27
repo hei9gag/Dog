@@ -8,6 +8,12 @@
 
 import Foundation
 
-struct Dog {
+class Dog {
 	let name: String
+	var imageUrls: [URL]?
+
+	init(name: String) {
+		self.name = name
+		self.imageUrls = nil
+	}
 }
