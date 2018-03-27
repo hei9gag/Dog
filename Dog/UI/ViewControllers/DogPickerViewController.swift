@@ -10,6 +10,7 @@ import UIKit
 import PinLayout
 import ReactiveCocoa
 import ReactiveSwift
+import SDWebImage
 
 class DogPickerViewController: UIViewController {
 
@@ -38,6 +39,13 @@ class DogPickerViewController: UIViewController {
 			self.disposable += self.viewModel.fetchBreedImage(breedName: self.dogNameLabel.text!.lowercased())
 			self.dogPickerView.reloadAllComponents()
 		}) <~ self.viewModel.dogs.skipRepeats { $0.count == $1.count }
+
+		self.reactive.makeBindingTarget(on: UIScheduler(), { [unowned self] (viewController, dogImages: [URL]) in
+			guard !dogImages.isEmpty else {
+				return
+			}
+			self.dogImageView.sd_setImage(with: dogImages[0], placeholderImage: nil)
+		}) <~ self.viewModel.dogImages
     }
 
     override func didReceiveMemoryWarning() {
@@ -59,7 +67,8 @@ class DogPickerViewController: UIViewController {
 	}
 
 	@objc @IBAction private func userDidTapOnMoreBreed(_ sender: UIButton) {
-
+		let imageUrl = self.viewModel.getNextDogImage()
+		self.dogImageView.sd_setImage(with: imageUrl, placeholderImage: nil)
 	}
 }
 
