@@ -46,7 +46,7 @@ class DogPickerViewController: UIViewController {
 		self.dogPickerView.isHidden = true
 		self.dogPickerView.backgroundColor = UIColor.lightGray
 
-		self.dogImageView.backgroundColor = UIColor.lightGray
+		self.dogImageView.backgroundColor = UIColor.black
 	}
 
 	private func viewModelBinding() {
