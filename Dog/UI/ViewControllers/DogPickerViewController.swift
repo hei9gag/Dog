@@ -61,12 +61,12 @@ class DogPickerViewController: UIViewController {
 			self.dogPickerView.reloadAllComponents()
 		}) <~ self.viewModel.dogs.skipRepeats { $0.count == $1.count }
 
-		self.reactive.makeBindingTarget(on: UIScheduler(), { [unowned self] (viewController, dogImages: [URL]) in
-			guard !dogImages.isEmpty else {
+		self.reactive.makeBindingTarget(on: UIScheduler(), { [unowned self] (viewController, dog) in
+			guard let dogImages = dog.imageUrls, !dogImages.isEmpty else {
 				return
 			}
 			self.dogImageView.sd_setImage(with: dogImages[0], placeholderImage: nil)
-		}) <~ self.viewModel.dogImages
+		}) <~ self.viewModel.dog.signal.skipNil()
 	}
 
 	@objc @IBAction private func userDidTapOnMoreBreed(_ sender: UIButton) {
