@@ -29,6 +29,8 @@ class DogPickerViewController: UIViewController {
 		self.setupUI()
 		self.viewModel = DogPickerViewModel()
 		self.viewModelBinding()
+
+		let _ = self.viewModel.fetchDogs()
     }
 
     override func didReceiveMemoryWarning() {

@@ -17,7 +17,6 @@
 		A71E65D2206BCD7000BCB2AD /* BreedServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71E65CD206BCD7000BCB2AD /* BreedServiceTest.swift */; };
 		A71E65D4206BCD7B00BCB2AD /* StringHelperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71E65D3206BCD7B00BCB2AD /* StringHelperTest.swift */; };
 		A77FCBAD206908F40031FA9F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77FCBAC206908F40031FA9F /* AppDelegate.swift */; };
-		A77FCBAF206908F40031FA9F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77FCBAE206908F40031FA9F /* ViewController.swift */; };
 		A77FCBB2206908F40031FA9F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A77FCBB0206908F40031FA9F /* Main.storyboard */; };
 		A77FCBB4206908F40031FA9F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A77FCBB3206908F40031FA9F /* Assets.xcassets */; };
 		A77FCBB7206908F40031FA9F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A77FCBB5206908F40031FA9F /* LaunchScreen.storyboard */; };
@@ -66,7 +65,6 @@
 		A71E65D3206BCD7B00BCB2AD /* StringHelperTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringHelperTest.swift; sourceTree = "<group>"; };
 		A77FCBA9206908F40031FA9F /* Dog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A77FCBAC206908F40031FA9F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A77FCBAE206908F40031FA9F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A77FCBB1206908F40031FA9F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A77FCBB3206908F40031FA9F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A77FCBB6206908F40031FA9F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -190,7 +188,6 @@
 				A77FCBCC20690A270031FA9F /* Models */,
 				A77FCBD520690BCB0031FA9F /* Networking */,
 				A79BE83F20692BE500F33C19 /* Services */,
-				A77FCBAE206908F40031FA9F /* ViewController.swift */,
 			);
 			path = Dog;
 			sourceTree = "<group>";
@@ -550,7 +547,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A79BE82120691DF100F33C19 /* ResponseStatus.swift in Sources */,
-				A77FCBAF206908F40031FA9F /* ViewController.swift in Sources */,
 				A77FCBDD20690CE10031FA9F /* Logger.swift in Sources */,
 				A79BE83C2069263800F33C19 /* String+Helper.swift in Sources */,
 				A79BE829206922C900F33C19 /* BreedImageResponseModel.swift in Sources */,

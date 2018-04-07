@@ -33,7 +33,17 @@ final class DogPickerViewModel {
 			BreedService.fetchBreedImages(breedName: breedName)
 		}
 
-		self.fetchDogAction.apply().startWithResult { [unowned self] result in
+	}
+
+	func getTitleForIndex(_ index: Int) -> String? {
+		guard index < dogs.value.count else {
+			return nil
+		}
+		return dogs.value[index].name.firstUppercased
+	}
+
+	func fetchDogs() -> Disposable? {
+		return self.fetchDogAction.apply().startWithResult { [unowned self] result in
 			switch result {
 			case .success(let dogs):
 				self.dogsMutable.value = dogs
@@ -43,13 +53,6 @@ final class DogPickerViewModel {
 				break
 			}
 		}
-	}
-
-	func getTitleForIndex(_ index: Int) -> String? {
-		guard index < dogs.value.count else {
-			return nil
-		}
-		return dogs.value[index].name.firstUppercased
 	}
 
 	func fetchBreedImage(breedName: String) -> Disposable? {
