@@ -15,11 +15,14 @@ import ReactiveSwift
 class DogPickerViewModelTest: XCTestCase {
 
 	var viewModel: DogPickerViewModel!
+	var apiService: MockBreedService!
 	let timeoutInterval: TimeInterval = 10
 
     override func setUp() {
         super.setUp()
-        self.viewModel = DogPickerViewModel()
+		self.apiService = MockBreedService()
+		self.viewModel = DogPickerViewModel(apiService: self.apiService)
+		let _ = self.viewModel.fetchDogs()
 		waitUntil(timeout: timeoutInterval, action: { done in
 			self.reactive.makeBindingTarget(on: UIScheduler(), { (_, dogs: [Dog]) in
 				guard !dogs.isEmpty else {
@@ -29,7 +32,6 @@ class DogPickerViewModelTest: XCTestCase {
 				expect(dogs.count).to(beGreaterThan(0))
 			}) <~ self.viewModel.dogs.skipRepeats { $0.count == $1.count }
 		})
-
     }
     
     override func tearDown() {
@@ -37,24 +39,24 @@ class DogPickerViewModelTest: XCTestCase {
         super.tearDown()
     }
 
-	func testGetTitleForIndex() {
-		var targetDogName = self.viewModel.dogs.value[0].name
-		var result = self.viewModel.getTitleForIndex(0)
-		expect(targetDogName.firstUppercased) == result
+	func testFetchDog() {
+		self.apiService.fetchErrorForAllBreed = true
 
-		targetDogName = self.viewModel.dogs.value[2].name
-		result = self.viewModel.getTitleForIndex(2)
-		expect(targetDogName.firstUppercased) == result
-
-		result = self.viewModel.getTitleForIndex(9999)
-		expect(result).to(beNil())
+		waitUntil(timeout: timeoutInterval, action: { done in
+			self.viewModel.fetchDogAction.apply().startWithFailed { (responseError) in
+				expect(responseError).notTo(beNil())
+				self.apiService.fetchErrorForAllBreed = false
+				done()
+			}
+		})
 	}
 
-	func testFetchBreedNameAndNextDogImage() {
-		let dogName = self.viewModel.dogs.value[2].name
+	func testFetchBreedImage() {
+		let dogName = "akita"
+
 		let _ = self.viewModel.fetchBreedImage(breedName: dogName)
 		waitUntil(timeout: timeoutInterval, action: { done in
-			self.reactive.makeBindingTarget(on: UIScheduler(), { (_, dog) in
+			self.reactive.makeBindingTarget(on: UIScheduler(), { (_, dog: Dog) in
 				done()
 				expect(dogName) == dog.name
 				expect(dog.imageUrls).notTo(beNil())
@@ -68,9 +70,20 @@ class DogPickerViewModelTest: XCTestCase {
 				dogImageUrl = self.viewModel.getNextDogImage()
 				expect(self.viewModel.currentImageIndex) == 2
 				expect(dogImageUrl!) == dog.imageUrls![self.viewModel.currentImageIndex]
-
-			}) <~ self.viewModel.dog.signal.skipNil()
+			}) <~ self.viewModel.dog.producer.skipNil()
 		})
 	}
 
+	func testGetTitleForIndex() {
+		var targetDogName = self.viewModel.dogs.value[0].name
+		var result = self.viewModel.getTitleForIndex(0)
+		expect(targetDogName.firstUppercased) == result
+
+		targetDogName = self.viewModel.dogs.value[2].name
+		result = self.viewModel.getTitleForIndex(2)
+		expect(targetDogName.firstUppercased) == result
+
+		result = self.viewModel.getTitleForIndex(9999)
+		expect(result).to(beNil())
+	}
 }

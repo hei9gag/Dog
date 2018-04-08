@@ -15,24 +15,25 @@ final class DogPickerViewModel {
 	let dogs: Property<[Dog]>
 
 	fileprivate(set) var currentImageIndex: Int = 0
+	fileprivate(set) var apiService: BreedAPIProtocol
 
 	private let dogMutable = MutableProperty<Dog?>(nil)
 	private let dogsMutable = MutableProperty<[Dog]>([])	
 	private(set) var fetchDogAction: Action<Void, [Dog], ResponseError>
 	private(set) var fetchDogImageAction: Action<String, [URL], ResponseError>
 
-	init() {
+	init(apiService: BreedAPIProtocol) {
 		self.dog = Property(self.dogMutable)
 		self.dogs = Property(self.dogsMutable)
+		self.apiService = apiService
 
 		self.fetchDogAction = Action {
-			BreedService.fetchAllBreeds()
+			return apiService.fetchAllBreeds()
 		}
 
 		self.fetchDogImageAction = Action { breedName in
-			BreedService.fetchBreedImages(breedName: breedName)
+			return apiService.fetchBreedImages(breedName: breedName)
 		}
-
 	}
 
 	func getTitleForIndex(_ index: Int) -> String? {

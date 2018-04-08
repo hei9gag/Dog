@@ -26,8 +26,13 @@ class DogPickerViewController: UIViewController {
 
 	override func viewDidLoad() {
         super.viewDidLoad()
+
+		if ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil {
+			return
+		}
+
 		self.setupUI()
-		self.viewModel = DogPickerViewModel()
+		self.viewModel = DogPickerViewModel(apiService: BreedService())
 		self.viewModelBinding()
 
 		let _ = self.viewModel.fetchDogs()

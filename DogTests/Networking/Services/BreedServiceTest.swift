@@ -13,6 +13,7 @@ import Nimble
 class BreedServiceTest: XCTestCase {
 
 	let timeoutInterval: TimeInterval = 10
+	let breedService = BreedService()
 
     override func setUp() {
         super.setUp()
@@ -25,8 +26,8 @@ class BreedServiceTest: XCTestCase {
     }
     
     func testFetchAllBreeds() {
-		waitUntil(timeout: timeoutInterval, action: { done in
-			BreedService.fetchAllBreeds()
+		waitUntil(timeout: timeoutInterval, action: { [unowned self] done in
+			self.breedService.fetchAllBreeds()
 				.ignoreError()
 				.startWithValues { (dogs) in
 					expect(dogs).notTo(beNil())
@@ -37,8 +38,8 @@ class BreedServiceTest: XCTestCase {
     }
 
 	func testFetchBreedImages() {
-		waitUntil(timeout: timeoutInterval, action: { done in
-			BreedService.fetchBreedImages(breedName: "hound")
+		waitUntil(timeout: timeoutInterval, action: { [unowned self] done in
+			self.breedService.fetchBreedImages(breedName: "hound")
 				.ignoreError()
 				.startWithValues { (imageUrls) in
 					expect(imageUrls).notTo(beNil())

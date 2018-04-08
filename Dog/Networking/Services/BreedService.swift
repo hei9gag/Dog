@@ -10,9 +10,9 @@ import Foundation
 import ReactiveSwift
 import Result
 
-final class BreedService {
+final class BreedService: BreedAPIProtocol {
 	// List all breed names without sub breeds.
-	static func fetchAllBreeds() -> SignalProducer<[Dog], ResponseError> {
+	func fetchAllBreeds() -> SignalProducer<[Dog], ResponseError> {
 		return SignalProducer { observer, disposable in
 			let apiPath = "breeds/list"
 			disposable += DogHTTPClient.shared.request(method: .get, URLString: apiPath)
@@ -36,8 +36,9 @@ final class BreedService {
 			}
 		}
 	}
+	
 	// Returns an array of all the dog images from all the master breeds
-	static func fetchBreedImages(breedName: String) -> SignalProducer<[URL], ResponseError> {
+	func fetchBreedImages(breedName: String) -> SignalProducer<[URL], ResponseError> {
 		return SignalProducer { observer, disposable in			
 			let apiPath = "breed/\(breedName)/images"
 			disposable += DogHTTPClient.shared.request(method: .get, URLString: apiPath)
