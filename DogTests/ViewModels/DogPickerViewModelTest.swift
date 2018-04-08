@@ -15,12 +15,12 @@ import ReactiveSwift
 class DogPickerViewModelTest: XCTestCase {
 
 	var viewModel: DogPickerViewModel!
-	var apiService: MockBreedService!
+	var apiService: StubBreedService!
 	let timeoutInterval: TimeInterval = 10
 
     override func setUp() {
         super.setUp()
-		self.apiService = MockBreedService()
+		self.apiService = StubBreedService()
 		self.viewModel = DogPickerViewModel(apiService: self.apiService)
 		let _ = self.viewModel.fetchDogs()
 		waitUntil(timeout: timeoutInterval, action: { done in

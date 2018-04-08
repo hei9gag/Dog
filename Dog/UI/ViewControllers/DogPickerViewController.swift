@@ -23,6 +23,7 @@ class DogPickerViewController: UIViewController {
 	fileprivate var fetchImageDisposable: Disposable?
 
 	private var loadingView: LoadingView!
+	private var viewDidInit: Bool = false
 
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,11 +33,18 @@ class DogPickerViewController: UIViewController {
 		}
 
 		self.setupUI()
-		self.viewModel = DogPickerViewModel(apiService: BreedService())
-		self.viewModelBinding()
-
-		let _ = self.viewModel.fetchDogs()
+		self.viewModel = DogPickerViewModel()
+		// self.viewModel = DogPickerViewModel(apiService: StubBreedService())
     }
+
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		if !viewDidInit {
+			self.viewDidInit = true
+			self.viewModelBinding()
+			let _ = self.viewModel.fetchDogs()
+		}
+	}
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -73,7 +81,16 @@ class DogPickerViewController: UIViewController {
 				return
 			}
 			self.dogImageView.sd_setImage(with: dogImages[0], placeholderImage: nil)
-		}) <~ self.viewModel.dog.signal.skipNil()
+		}) <~ self.viewModel.dog.producer.skipNil()
+
+		/*
+		self.reactive.makeBindingTarget(on: UIScheduler(), { [unowned self] (viewController, viewModelError) in
+			let retryAction = UIAlertAction(title: "Retry", style: .destructive, handler: { (alertAction) in
+				viewModelError.retryAction?()
+			})
+			self.showAlert(message: viewModelError.error.localizedDescription, destructiveAction: retryAction)
+
+		}) <~ self.viewModel.errorMutable.producer.skipNil()*/
 	}
 
 	@objc @IBAction private func userDidTapOnMoreBreed(_ sender: UIButton) {

@@ -18,7 +18,9 @@
 		A77E87742078FAE600A7A88B /* BreedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77E87732078FAE600A7A88B /* BreedService.swift */; };
 		A77E87762078FB8E00A7A88B /* BreedAPIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77E87752078FB8E00A7A88B /* BreedAPIProtocol.swift */; };
 		A77E877F2079023E00A7A88B /* BreedServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77E877E2079023E00A7A88B /* BreedServiceTest.swift */; };
-		A77E8782207902FC00A7A88B /* MockBreedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77E8781207902FC00A7A88B /* MockBreedService.swift */; };
+		A77E87882079E78200A7A88B /* StubBreedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77E87872079E78200A7A88B /* StubBreedService.swift */; };
+		A77E878A2079ED3000A7A88B /* ViewModelError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77E87892079ED3000A7A88B /* ViewModelError.swift */; };
+		A77E878C2079EEC100A7A88B /* UIViewController+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77E878B2079EEC100A7A88B /* UIViewController+Helper.swift */; };
 		A77FCBAD206908F40031FA9F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77FCBAC206908F40031FA9F /* AppDelegate.swift */; };
 		A77FCBB2206908F40031FA9F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A77FCBB0206908F40031FA9F /* Main.storyboard */; };
 		A77FCBB4206908F40031FA9F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A77FCBB3206908F40031FA9F /* Assets.xcassets */; };
@@ -67,7 +69,9 @@
 		A77E87732078FAE600A7A88B /* BreedService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BreedService.swift; sourceTree = "<group>"; };
 		A77E87752078FB8E00A7A88B /* BreedAPIProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedAPIProtocol.swift; sourceTree = "<group>"; };
 		A77E877E2079023E00A7A88B /* BreedServiceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BreedServiceTest.swift; sourceTree = "<group>"; };
-		A77E8781207902FC00A7A88B /* MockBreedService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockBreedService.swift; sourceTree = "<group>"; };
+		A77E87872079E78200A7A88B /* StubBreedService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StubBreedService.swift; sourceTree = "<group>"; };
+		A77E87892079ED3000A7A88B /* ViewModelError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelError.swift; sourceTree = "<group>"; };
+		A77E878B2079EEC100A7A88B /* UIViewController+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Helper.swift"; sourceTree = "<group>"; };
 		A77FCBA9206908F40031FA9F /* Dog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A77FCBAC206908F40031FA9F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A77FCBB1206908F40031FA9F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -163,18 +167,17 @@
 		A77E877D2079023E00A7A88B /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				A77E8780207902DF00A7A88B /* Mock */,
 				A77E877E2079023E00A7A88B /* BreedServiceTest.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
 		};
-		A77E8780207902DF00A7A88B /* Mock */ = {
+		A77E87862079E78200A7A88B /* Stubs */ = {
 			isa = PBXGroup;
 			children = (
-				A77E8781207902FC00A7A88B /* MockBreedService.swift */,
+				A77E87872079E78200A7A88B /* StubBreedService.swift */,
 			);
-			path = Mock;
+			path = Stubs;
 			sourceTree = "<group>";
 		};
 		A77FCBA0206908F40031FA9F = {
@@ -232,6 +235,7 @@
 			children = (
 				A77FCBCD20690A5B0031FA9F /* Response */,
 				A79BE85220693A0000F33C19 /* Dog.swift */,
+				A77E87892079ED3000A7A88B /* ViewModelError.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -249,6 +253,7 @@
 		A77FCBD520690BCB0031FA9F /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				A77E87862079E78200A7A88B /* Stubs */,
 				A77E87722078FAE600A7A88B /* Services */,
 				A79BE82220691E7200F33C19 /* ResponseError.swift */,
 				A79BE81E20691DCD00F33C19 /* DogHTTPClient.swift */,
@@ -289,6 +294,7 @@
 			children = (
 				A79BE83B2069263800F33C19 /* String+Helper.swift */,
 				A79BE850206938AC00F33C19 /* SignalProducer+Helper.swift */,
+				A77E878B2079EEC100A7A88B /* UIViewController+Helper.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -560,6 +566,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A77E878C2079EEC100A7A88B /* UIViewController+Helper.swift in Sources */,
+				A77E87882079E78200A7A88B /* StubBreedService.swift in Sources */,
+				A77E878A2079ED3000A7A88B /* ViewModelError.swift in Sources */,
 				A77E87742078FAE600A7A88B /* BreedService.swift in Sources */,
 				A79BE82120691DF100F33C19 /* ResponseStatus.swift in Sources */,
 				A77FCBDD20690CE10031FA9F /* Logger.swift in Sources */,
@@ -590,7 +599,6 @@
 				A77E877F2079023E00A7A88B /* BreedServiceTest.swift in Sources */,
 				A71E65CF206BCD7000BCB2AD /* ResponseModelTests.swift in Sources */,
 				A71E65D4206BCD7B00BCB2AD /* StringHelperTest.swift in Sources */,
-				A77E8782207902FC00A7A88B /* MockBreedService.swift in Sources */,
 				A71E65D0206BCD7000BCB2AD /* DogHTTPClientTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

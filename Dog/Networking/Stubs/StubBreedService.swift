@@ -9,16 +9,15 @@
 import Foundation
 import ReactiveSwift
 import Result
-@testable import Dog
 
-final class MockBreedService: BreedAPIProtocol {
+final class StubBreedService: BreedAPIProtocol {
 
-	var fetchErrorForAllBreed: Bool = false
+	var fetchErrorForAllBreed: Bool = true
 
 	func fetchAllBreeds() -> SignalProducer<[Dog], ResponseError> {
 
 		guard !self.fetchErrorForAllBreed else {
-			let responseError = ResponseError(errorType: .responseStatusError)
+			let responseError = ResponseError(errorType: .responseStatusError)			
 			return SignalProducer(error: responseError)
 		}
 

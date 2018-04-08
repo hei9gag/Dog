@@ -15,24 +15,29 @@ final class DogPickerViewModel {
 	let dogs: Property<[Dog]>
 
 	fileprivate(set) var currentImageIndex: Int = 0
-	fileprivate(set) var apiService: BreedAPIProtocol
+	fileprivate(set) var apiService: BreedAPIProtocol = BreedService()
 
 	private let dogMutable = MutableProperty<Dog?>(nil)
-	private let dogsMutable = MutableProperty<[Dog]>([])	
-	private(set) var fetchDogAction: Action<Void, [Dog], ResponseError>
-	private(set) var fetchDogImageAction: Action<String, [URL], ResponseError>
+	private let dogsMutable = MutableProperty<[Dog]>([])
+	// private(set) var errorMutable = MutableProperty<ViewModelError?>(nil)
 
-	init(apiService: BreedAPIProtocol) {
+	private(set) var fetchDogAction: Action<Void, [Dog], ResponseError>!
+	private(set) var fetchDogImageAction: Action<String, [URL], ResponseError>!
+
+	init(apiService: BreedAPIProtocol? = nil) {
 		self.dog = Property(self.dogMutable)
 		self.dogs = Property(self.dogsMutable)
-		self.apiService = apiService
 
-		self.fetchDogAction = Action {
-			return apiService.fetchAllBreeds()
+		if let newApiService = apiService {
+			self.apiService = newApiService
 		}
 
-		self.fetchDogImageAction = Action { breedName in
-			return apiService.fetchBreedImages(breedName: breedName)
+		self.fetchDogAction = Action { [unowned self] in
+			return self.apiService.fetchAllBreeds()
+		}
+
+		self.fetchDogImageAction = Action { [unowned self] breedName in
+			return self.apiService.fetchBreedImages(breedName: breedName)
 		}
 	}
 
@@ -48,10 +53,18 @@ final class DogPickerViewModel {
 			switch result {
 			case .success(let dogs):
 				self.dogsMutable.value = dogs
-				break
 			case .failure(_):
-				// TODO handle error case
 				break
+				// TODO: Handle Error
+				/*
+				let viewModelError = ViewModelError(error: error, retryAction: { [weak self] in
+					guard let this = self else {
+						return
+					}
+					let _ = this.fetchDogs()
+				})
+				
+				self.errorMutable.value = viewModelError*/
 			}
 		}
 	}
@@ -76,8 +89,16 @@ final class DogPickerViewModel {
 				self.dogMutable.value = dog
 				self.currentImageIndex = 0
 			case .failure(_):
-				// TODO handle error case
 				break
+				// TODO: Handle Error
+				/*
+				let viewModelError = ViewModelError(error: responseError, retryAction: { [weak self] in
+					guard let this = self else {
+						return
+					}
+					let _ = this.fetchBreedImage(breedName: breedName)
+				})
+				self.errorMutable.value = viewModelError*/
 			}
 		}
 	}
