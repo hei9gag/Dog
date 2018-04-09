@@ -12,7 +12,7 @@ import Result
 
 final class StubBreedService: BreedAPIProtocol {
 
-	var fetchErrorForAllBreed: Bool = true
+	var fetchErrorForAllBreed: Bool = false
 
 	func fetchAllBreeds() -> SignalProducer<[Dog], ResponseError> {
 
