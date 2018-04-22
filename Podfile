@@ -9,6 +9,7 @@ target 'Dog' do
   pod 'ReactiveCocoa', '~> 7.0'
   pod 'PinLayout'
   pod 'SDWebImage', '~> 4.0'
+  pod 'IGListKit', '~> 3.0'
 
   target 'DogTests' do
     inherit! :search_paths

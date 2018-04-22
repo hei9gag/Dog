@@ -1,5 +1,10 @@
 PODS:
   - Alamofire (4.7.0)
+  - IGListKit (3.2.0):
+    - IGListKit/Default (= 3.2.0)
+  - IGListKit/Default (3.2.0):
+    - IGListKit/Diffing
+  - IGListKit/Diffing (3.2.0)
   - Nimble (7.0.3)
   - PinLayout (1.5.9)
   - Quick (1.2.0)
@@ -14,6 +19,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 4.7)
+  - IGListKit (~> 3.0)
   - Nimble (~> 7.0.2)
   - PinLayout
   - Quick (~> 1.2.0)
@@ -22,6 +28,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Alamofire: 907e0a98eb68cdb7f9d1f541a563d6ac5dc77b25
+  IGListKit: ffe6f98a728ab0250aceea22e7957aa5477c5048
   Nimble: 7f5a9c447a33002645a071bddafbfb24ea70e0ac
   PinLayout: b2ebf8622b28e82b6e1216ab4e4a0a8d082214fe
   Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
@@ -30,6 +37,6 @@ SPEC CHECKSUMS:
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
   SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
 
-PODFILE CHECKSUM: 937c932399638ee21fc741a71c3bfb8ad3da121c
+PODFILE CHECKSUM: ba85a19b1cbb01470f8dd35a28d7f55f6a3171bb
 
 COCOAPODS: 1.4.0
